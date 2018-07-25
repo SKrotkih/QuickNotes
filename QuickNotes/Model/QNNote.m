@@ -11,7 +11,6 @@
 
 @implementation QNNote
 
-// Convert dictionary to QNNote instance
 + (QNNote*) parse: (NSDictionary*) dict
 {
     QNNote* note = [[QNNote alloc] init];

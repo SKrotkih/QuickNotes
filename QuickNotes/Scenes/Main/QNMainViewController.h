@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QNViewModel.h"
 
 @interface QNMainViewController : UIViewController
 
+@property(nonatomic, strong) QNViewModel* viewModel;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 

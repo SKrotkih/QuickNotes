@@ -43,8 +43,9 @@ typedef enum {
     }];
 }
 
+#pragma mark Private methods
 
-- (void) requestType: (QNRequest) type concrete: (NSString*) userInfo completion: (void (^)(__nullable id)) dataCompletion
+- (NSMutableURLRequest*) request: (QNRequest) type concrete: (NSString*) userInfo
 {
     NSMutableString* urlString = baseURL.mutableCopy;
     NSString* httpMethod;
@@ -83,14 +84,20 @@ typedef enum {
     //DELETE /notes/{id}
     
     NSURL* url = [NSURL URLWithString: urlString];
-    NSURLSessionConfiguration* config = [NSURLSessionConfiguration defaultSessionConfiguration];
-    NSURLSession* session = [NSURLSession sessionWithConfiguration: config];
     NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL: url];
     request.HTTPMethod = httpMethod;
-    
     [request addValue: @"application/json" forHTTPHeaderField: @"Content-Type"];
     //    [request addValue: "111" forHTTPHeaderField: @"user-email"];
-    
+
+    return request;
+}
+
+
+- (void) requestType: (QNRequest) type concrete: (NSString*) userInfo completion: (void (^)(__nullable id)) dataCompletion
+{
+    NSMutableURLRequest* request = [self request: type concrete: userInfo];
+    NSURLSessionConfiguration* config = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession* session = [NSURLSession sessionWithConfiguration: config];
     NSURLSessionDataTask* sessionTask = [session dataTaskWithRequest: request completionHandler: ^(NSData* data, NSURLResponse* response, NSError* error)
     {
         if (error) {
@@ -101,8 +108,8 @@ typedef enum {
             NSHTTPURLResponse* httpResp = (NSHTTPURLResponse*) response;
             if (httpResp.statusCode == 200) {
                 id jsonObject = [NSJSONSerialization JSONObjectWithData: data
-                                                             options: kNilOptions
-                                                               error: &error];
+                                                                options: kNilOptions
+                                                                  error: &error];
                 if (error) {
                     NSLog(@"Error: %@", error.localizedDescription);
                     dataCompletion(nil);

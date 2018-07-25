@@ -7,8 +7,7 @@
 //
 
 #import "QNMainViewController.h"
-#import "QNServiceInteractor.h"
-#import "QNNote.h"
+#import "QNDependencies.h"
 
 @interface QNMainViewController ()
 
@@ -16,23 +15,19 @@
 
 @implementation QNMainViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+@synthesize viewModel;
+@synthesize tableView;
 
-    QNServiceInteractor* interactor = [[QNServiceInteractor alloc] init];
-    [interactor getNotes: ^(NSArray* notes){
-        for (QNNote* note in notes)
-        {
-            NSLog(@"Notes");
-            NSLog(@"%@;%@", note.noteId, note.title);
-        }
-    }];
-    
+QNDependencies* dependencies;
+
+- (void) viewDidLoad {
+    [super viewDidLoad];
+
+    [dependencies configure: self];
+    [viewModel bindTo: tableView];
 }
 
-
-- (void)didReceiveMemoryWarning {
+- (void) didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
