@@ -17,6 +17,8 @@
 		7F9BA14D2108A1B00065A0EE /* QuickNotesUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F9BA14C2108A1B00065A0EE /* QuickNotesUITests.m */; };
 		7F9BA1602108A5200065A0EE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7F9BA15E2108A5200065A0EE /* Localizable.strings */; };
 		7F9BA1692108AA6D0065A0EE /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7F9BA1682108AA6D0065A0EE /* README.md */; };
+		7F9BA16B2108B6210065A0EE /* QNNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F9BA16A2108B6210065A0EE /* QNNote.m */; };
+		7F9BA1722108CC330065A0EE /* QNServiceInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F9BA1712108CC330065A0EE /* QNServiceInteractor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,10 @@
 		7F9BA15F2108A5200065A0EE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7F9BA1612108A5370065A0EE /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7F9BA1682108AA6D0065A0EE /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		7F9BA16A2108B6210065A0EE /* QNNote.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QNNote.m; sourceTree = "<group>"; };
+		7F9BA16C2108B6480065A0EE /* QNNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNNote.h; sourceTree = "<group>"; };
+		7F9BA1702108CC330065A0EE /* QNServiceInteractor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QNServiceInteractor.h; sourceTree = "<group>"; };
+		7F9BA1712108CC330065A0EE /* QNServiceInteractor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QNServiceInteractor.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +112,7 @@
 		7F9BA1272108A1AE0065A0EE /* QuickNotes */ = {
 			isa = PBXGroup;
 			children = (
+				7F9BA16F2108CC010065A0EE /* Network */,
 				7F9BA1652108A63B0065A0EE /* Model */,
 				7F9BA1632108A6040065A0EE /* Scenes */,
 				7F9BA1662108AA0A0065A0EE /* Supporting files */,
@@ -165,6 +172,8 @@
 		7F9BA1652108A63B0065A0EE /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7F9BA16C2108B6480065A0EE /* QNNote.h */,
+				7F9BA16A2108B6210065A0EE /* QNNote.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -185,6 +194,15 @@
 				7F9BA1332108A1AF0065A0EE /* LaunchScreen.storyboard */,
 			);
 			path = LaunchScreen;
+			sourceTree = "<group>";
+		};
+		7F9BA16F2108CC010065A0EE /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				7F9BA1702108CC330065A0EE /* QNServiceInteractor.h */,
+				7F9BA1712108CC330065A0EE /* QNServiceInteractor.m */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -320,8 +338,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F9BA16B2108B6210065A0EE /* QNNote.m in Sources */,
 				7F9BA12D2108A1AE0065A0EE /* QNMainViewController.m in Sources */,
 				7F9BA1382108A1AF0065A0EE /* main.m in Sources */,
+				7F9BA1722108CC330065A0EE /* QNServiceInteractor.m in Sources */,
 				7F9BA12A2108A1AE0065A0EE /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

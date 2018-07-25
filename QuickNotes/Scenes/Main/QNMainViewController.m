@@ -7,6 +7,8 @@
 //
 
 #import "QNMainViewController.h"
+#import "QNServiceInteractor.h"
+#import "QNNote.h"
 
 @interface QNMainViewController ()
 
@@ -17,6 +19,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+
+    QNServiceInteractor* interactor = [[QNServiceInteractor alloc] init];
+    [interactor getNotes: ^(NSArray* notes){
+        for (QNNote* note in notes)
+        {
+            NSLog(@"Notes");
+            NSLog(@"%@;%@", note.noteId, note.title);
+        }
+    }];
+    
 }
 
 
