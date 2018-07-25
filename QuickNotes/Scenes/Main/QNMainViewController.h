@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface QNMainViewController : UIQNMainViewController
+@interface QNMainViewController : UIViewController
 
 
 @end

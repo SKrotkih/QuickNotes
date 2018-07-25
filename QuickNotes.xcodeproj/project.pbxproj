@@ -16,6 +16,7 @@
 		7F9BA1422108A1B00065A0EE /* QuickNotesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F9BA1412108A1B00065A0EE /* QuickNotesTests.m */; };
 		7F9BA14D2108A1B00065A0EE /* QuickNotesUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F9BA14C2108A1B00065A0EE /* QuickNotesUITests.m */; };
 		7F9BA1602108A5200065A0EE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7F9BA15E2108A5200065A0EE /* Localizable.strings */; };
+		7F9BA1692108AA6D0065A0EE /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7F9BA1682108AA6D0065A0EE /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		7F9BA14E2108A1B00065A0EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7F9BA15F2108A5200065A0EE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7F9BA1612108A5370065A0EE /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7F9BA1682108AA6D0065A0EE /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,12 +108,10 @@
 			children = (
 				7F9BA1652108A63B0065A0EE /* Model */,
 				7F9BA1632108A6040065A0EE /* Scenes */,
-				7F9BA1282108A1AE0065A0EE /* AppDelegate.h */,
-				7F9BA1292108A1AE0065A0EE /* AppDelegate.m */,
+				7F9BA1662108AA0A0065A0EE /* Supporting files */,
 				7F9BA1622108A5E10065A0EE /* Resources */,
-				7F9BA1362108A1AF0065A0EE /* Info.plist */,
-				7F9BA15E2108A5200065A0EE /* Localizable.strings */,
 				7F9BA1372108A1AF0065A0EE /* main.m */,
+				7F9BA1362108A1AF0065A0EE /* Info.plist */,
 			);
 			path = QuickNotes;
 			sourceTree = "<group>";
@@ -137,7 +137,7 @@
 		7F9BA1622108A5E10065A0EE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				7F9BA1332108A1AF0065A0EE /* LaunchScreen.storyboard */,
+				7F9BA15E2108A5200065A0EE /* Localizable.strings */,
 				7F9BA1312108A1AF0065A0EE /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -146,6 +146,7 @@
 		7F9BA1632108A6040065A0EE /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				7F9BA1672108AA320065A0EE /* LaunchScreen */,
 				7F9BA1642108A60E0065A0EE /* Main */,
 			);
 			path = Scenes;
@@ -166,6 +167,24 @@
 			children = (
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		7F9BA1662108AA0A0065A0EE /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				7F9BA1282108A1AE0065A0EE /* AppDelegate.h */,
+				7F9BA1292108A1AE0065A0EE /* AppDelegate.m */,
+				7F9BA1682108AA6D0065A0EE /* README.md */,
+			);
+			path = "Supporting files";
+			sourceTree = "<group>";
+		};
+		7F9BA1672108AA320065A0EE /* LaunchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				7F9BA1332108A1AF0065A0EE /* LaunchScreen.storyboard */,
+			);
+			path = LaunchScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -274,6 +293,7 @@
 			files = (
 				7F9BA1352108A1AF0065A0EE /* LaunchScreen.storyboard in Resources */,
 				7F9BA1602108A5200065A0EE /* Localizable.strings in Resources */,
+				7F9BA1692108AA6D0065A0EE /* README.md in Resources */,
 				7F9BA1322108A1AF0065A0EE /* Assets.xcassets in Resources */,
 				7F9BA1302108A1AE0065A0EE /* Main.storyboard in Resources */,
 			);
@@ -418,7 +438,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -471,7 +491,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
