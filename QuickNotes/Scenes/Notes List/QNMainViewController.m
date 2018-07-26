@@ -32,14 +32,27 @@ NSString* kEditNoteSeque = @"editNote";
     
     dependencies = [[QNDependencies alloc] init];
     [dependencies configure: self];
+    [self configureView];
     [viewModel bindTo: tableView router: self];
 }
 
 - (void) viewWillAppear: (BOOL)animated
 {
     [super viewWillAppear: animated];
-    
-    [viewModel reloadData];
+
+}
+
+- (void) configureView
+{
+    self.buttonBackgroundView.layer.cornerRadius = 30.0;
+    UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget: self action: @selector(addNote)];
+    tapRecognizer.numberOfTapsRequired = 1;
+    [self.buttonBackgroundView addGestureRecognizer: tapRecognizer];
+}
+
+- (void) addNote
+{
+    [self.viewModel addNote];
 }
 
 - (void) didReceiveMemoryWarning {
@@ -52,6 +65,7 @@ NSString* kEditNoteSeque = @"editNote";
     if ([segue.identifier isEqualToString: kEditNoteSeque]) {
         QNNoteEditorViewController* viewController = (QNNoteEditorViewController*) segue.destinationViewController;
         viewController.note = self.note;
+        viewController.viewModel = self.viewModel;
     }
 }
 

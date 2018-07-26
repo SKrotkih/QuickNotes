@@ -15,5 +15,7 @@
 
 - (void) bindTo: (UITableView*) tableView router: (id) router;
 - (void) reloadData;
+- (void) updateNote: (QNNote*) note;
+- (void) addNote;
 
 @end

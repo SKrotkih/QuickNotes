@@ -34,6 +34,7 @@
 
 - (IBAction) doneButtonPressed: (id) sender {
     self.note.title = self.textView.text;
+    [self.viewModel updateNote: self.note];
     [self.navigationController popViewControllerAnimated: YES];
 }
 

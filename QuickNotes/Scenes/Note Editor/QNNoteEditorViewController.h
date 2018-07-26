@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QNViewModel.h"
 #import "QNNote.h"
 
 @interface QNNoteEditorViewController : UIViewController
 
+@property (nonatomic, strong) QNViewModel* viewModel;
+
 @property (weak, nonatomic) IBOutlet UITextView *textView;
-@property(assign, nonatomic) QNNote* note;
+@property (strong, nonatomic) QNNote* note;
 
 @end

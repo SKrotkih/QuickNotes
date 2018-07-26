@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class QNNote;
+
 @interface QNServiceInteractor : NSObject
 
 /*!
@@ -24,5 +26,7 @@
  
  */
 - (void) getNotes: (void (^)(NSArray*)) dataCompletion;
+
+- (void) updateNote: (QNNote*) note completion: (void (^)(void)) completion;
 
 @end

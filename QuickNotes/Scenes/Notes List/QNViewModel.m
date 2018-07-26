@@ -35,6 +35,7 @@ NSString* kCellIdentifier = @"QNNoteTableViewCell";
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.notes = [NSMutableArray array];
+    [self reloadData];
 }
 
 - (void) reloadData
@@ -49,6 +50,21 @@ NSString* kCellIdentifier = @"QNNoteTableViewCell";
 
 - (void) selectNote: (QNNote*) note
 {
+    [self.router launchNoteEditor: note];
+}
+
+- (void) updateNote: (QNNote*) note
+{
+    [self.interactor updateNote: note completion: ^{
+        [self reloadData];
+    }];
+}
+
+- (void) addNote
+{
+    QNNote* note = [[QNNote alloc] init];
+    note.noteId = @"777";
+    note.title = @"";
     [self.router launchNoteEditor: note];
 }
 

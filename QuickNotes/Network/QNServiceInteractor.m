@@ -24,7 +24,7 @@ typedef enum {
 
 - (void) getNotes: (void (^)(NSArray*)) dataCompletion
 {
-    [self requestType: getNotes concrete: @"" completion: ^(__nullable id json)
+    [self requestType: getNotes note: nil completion: ^(__nullable id json)
     {
         if (json == nil)
         {
@@ -43,9 +43,17 @@ typedef enum {
     }];
 }
 
+- (void) updateNote: (QNNote*) note completion: (void (^)(void)) completion
+{
+    [self requestType: putNotesId note: note completion: ^(__nullable id json)
+     {
+         completion();
+     }];
+}
+
 #pragma mark Private methods
 
-- (NSMutableURLRequest*) request: (QNRequest) type concrete: (NSString*) userInfo
+- (NSMutableURLRequest*) request: (QNRequest) type note: (nullable QNNote*) note
 {
     NSMutableString* urlString = baseURL.mutableCopy;
     NSString* httpMethod;
@@ -57,7 +65,7 @@ typedef enum {
             break;
         case getNotesId:
             [urlString appendString: @"/notes"];
-            [urlString appendString: [NSString stringWithFormat: @"/%@", userInfo]];
+            [urlString appendString: [NSString stringWithFormat: @"/%@", note.noteId]];
             httpMethod = @"GET";
             break;
         case postNotes:
@@ -66,12 +74,12 @@ typedef enum {
             break;
         case putNotesId:
             [urlString appendString: @"/notes"];
-            [urlString appendString: [NSString stringWithFormat: @"/%@", userInfo]];
+            [urlString appendString: [NSString stringWithFormat: @"/%@", note.noteId]];
             httpMethod = @"PUT";
             break;
         case deleteNotesId:
             [urlString appendString: @"/notes"];
-            [urlString appendString: [NSString stringWithFormat: @"/%@", userInfo]];
+            [urlString appendString: [NSString stringWithFormat: @"/%@", note.noteId]];
             httpMethod = @"DELETE";
             break;
     }
@@ -82,20 +90,36 @@ typedef enum {
     //POST /notes
     //PUT /notes/{id}
     //DELETE /notes/{id}
+
+//    [{
+//        "id": 1, "title": "Jogging in park"
+//    }, {
+//        "id": 2, "title": "Pick-up posters from post-office"
+//    }]
     
     NSURL* url = [NSURL URLWithString: urlString];
     NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL: url];
     request.HTTPMethod = httpMethod;
-    [request addValue: @"application/json" forHTTPHeaderField: @"Content-Type"];
-    //    [request addValue: "111" forHTTPHeaderField: @"user-email"];
+    
+    if (type == putNotesId)
+    {
+        [request setValue: @"application/json" forHTTPHeaderField: @"Accept"];
+        [request setValue: @"application/json" forHTTPHeaderField: @"Content-Type"];
+        NSString* jsonPostBody = [NSString stringWithFormat: @"{\"id\":%@,\"title\":\"%@\"}", note.noteId, note.title];
+        NSData* postData = [jsonPostBody dataUsingEncoding: NSUTF8StringEncoding allowLossyConversion: NO];
+        [request setHTTPBody: postData];
+    }
+    else
+    {
+        [request addValue: @"application/json" forHTTPHeaderField: @"Content-Type"];
+    }
 
     return request;
 }
 
-
-- (void) requestType: (QNRequest) type concrete: (NSString*) userInfo completion: (void (^)(__nullable id)) dataCompletion
+- (void) requestType: (QNRequest) type note: (nullable QNNote*) note completion: (void (^)(__nullable id)) dataCompletion
 {
-    NSMutableURLRequest* request = [self request: type concrete: userInfo];
+    NSMutableURLRequest* request = [self request: type note: note];
     NSURLSessionConfiguration* config = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession* session = [NSURLSession sessionWithConfiguration: config];
     NSURLSessionDataTask* sessionTask = [session dataTaskWithRequest: request completionHandler: ^(NSData* data, NSURLResponse* response, NSError* error)
@@ -119,7 +143,14 @@ typedef enum {
                     dataCompletion(jsonObject);
                 }
             }
-            else {
+            else if (httpResp.statusCode == 201)
+            {
+                // But nothing happened!
+                NSLog(@"201 Created");
+                dataCompletion(nil);
+            }
+            else
+            {
                 NSLog(@"Wrong satatus code: %ld", httpResp.statusCode);
                 dataCompletion(nil);
             }
