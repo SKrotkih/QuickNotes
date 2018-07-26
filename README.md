@@ -23,8 +23,19 @@ Start he app by pressing Command+R
 - add new note
 - remove note (swipe on table view)
 - edit note
-- localized
-- XCTest presented
+- localization
+- XCTest - presented
+- some methods and properties are documented 
+
+Notes.
+ 
+There are some issues with API.
+Does not work some requests.
+
+PUT /notes/{id}
+I tried to send JSON (for example, i tried different):
+{"id":1,"title":"Jogging in park"}
+status code is 201 but nothing happened on the server (I expected to add a new record or update existed)
 
 07-25-2018
 Sergey Krotkih
