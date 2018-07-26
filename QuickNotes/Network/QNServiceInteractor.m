@@ -51,6 +51,14 @@ typedef enum {
      }];
 }
 
+- (void) deleteNote: (QNNote*) note completion: (void (^)(void)) completion
+{
+    [self requestType: deleteNotesId note: note completion: ^(__nullable id json)
+     {
+         completion();
+     }];
+}
+
 #pragma mark Private methods
 
 - (NSMutableURLRequest*) request: (QNRequest) type note: (nullable QNNote*) note

@@ -29,4 +29,6 @@
 
 - (void) updateNote: (QNNote*) note completion: (void (^)(void)) completion;
 
+- (void) deleteNote: (QNNote*) note completion: (void (^)(void)) completion;
+
 @end

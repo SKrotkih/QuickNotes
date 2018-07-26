@@ -63,9 +63,25 @@ NSString* kCellIdentifier = @"QNNoteTableViewCell";
 - (void) addNote
 {
     QNNote* note = [[QNNote alloc] init];
-    note.noteId = @"777";
+    note.noteId = [self uniqId];
     note.title = @"";
     [self.router launchNoteEditor: note];
+}
+
+// Generate uniq id
+- (NSString*) uniqId
+{
+    NSInteger noteId = 0;
+    for (QNNote* note in self.notes)
+    {
+        NSInteger currId = [note.noteId integerValue];
+        noteId = MAX(noteId, currId);
+    }
+    
+    // But we should use like this:
+    // NSString* noteId = [[NSUUID UUID] UUIDString];
+    
+    return [NSString stringWithFormat: @"%ld", noteId + 1];
 }
 
 #pragma mark- TableView Delegates
@@ -100,6 +116,22 @@ NSString* kCellIdentifier = @"QNNoteTableViewCell";
     [self.tableView deselectRowAtIndexPath: indexPath animated: YES];
     QNNote* note = [self.notes objectAtIndex: indexPath.row];
     [self selectNote: note];
+}
+
+- (BOOL) tableView: (UITableView*) tableView canEditRowAtIndexPath: (NSIndexPath*) indexPath
+{
+    return YES;
+}
+
+- (void) tableView: (UITableView*) tableView commitEditingStyle: (UITableViewCellEditingStyle) editingStyle forRowAtIndexPath: (NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        QNNote* note = [self.notes objectAtIndex: indexPath.row];
+        [self.interactor deleteNote: note completion: ^{
+            [self reloadData];
+        }];
+    }
 }
 
 @end
