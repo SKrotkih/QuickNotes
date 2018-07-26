@@ -24,6 +24,7 @@ Start he app by pressing Command+R
 - remove note (swipe on table view)
 - edit note
 - localized
+- there is XCTest
 
 07-25-2018
 Sergey Krotkih
