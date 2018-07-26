@@ -10,9 +10,11 @@
 #import "QNNote.h"
 
 @protocol QNNotesRouter
-- (void) launchNoteEditor: (QNNote*) note;
+- (void) editNote: (QNNote*) note;
+- (void) addNote: (QNNote*) note;
 @end
 
 @interface QNNotesRouter: NSObject
-- (void) launchNoteEditor: (QNNote*) note;
+- (void) editNote: (QNNote*) note;
+- (void) addNote: (QNNote*) note;
 @end

@@ -14,6 +14,7 @@
 @interface QNMainViewController ()
 
 @property(nonatomic, weak) QNNote* note;
+@property(nonatomic, assign) Boolean isItNewNote;
 
 @end
 
@@ -54,15 +55,24 @@ NSString* kEditNoteSeque = @"editNote";
     if ([segue.identifier isEqualToString: kEditNoteSeque]) {
         QNNoteEditorViewController* viewController = (QNNoteEditorViewController*) segue.destinationViewController;
         viewController.note = self.note;
+        viewController.isItNewNote = self.isItNewNote;
         viewController.viewModel = self.viewModel;
     }
 }
 
 #pragma mark - QNNotesRouter protocol implementation
 
-- (void) launchNoteEditor: (QNNote*) note
+- (void) editNote: (QNNote*) note
 {
     self.note = note;
+    self.isItNewNote = NO;
+    [self performSegueWithIdentifier: kEditNoteSeque sender: self];
+}
+
+- (void) addNote: (QNNote*) note
+{
+    self.note = note;
+    self.isItNewNote = YES;
     [self performSegueWithIdentifier: kEditNoteSeque sender: self];
 }
 

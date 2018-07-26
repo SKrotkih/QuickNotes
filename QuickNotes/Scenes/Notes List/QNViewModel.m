@@ -50,7 +50,7 @@ NSString* kCellIdentifier = @"QNNoteTableViewCell";
 
 - (void) selectNote: (QNNote*) note
 {
-    [self.router launchNoteEditor: note];
+    [self.router editNote: note];
 }
 
 - (void) updateNote: (QNNote*) note
@@ -65,7 +65,7 @@ NSString* kCellIdentifier = @"QNNoteTableViewCell";
     QNNote* note = [[QNNote alloc] init];
     note.noteId = [self uniqId];
     note.title = @"";
-    [self.router launchNoteEditor: note];
+    [self.router addNote: note];
 }
 
 // Generate uniq id

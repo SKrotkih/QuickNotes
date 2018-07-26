@@ -16,5 +16,6 @@
 @property (nonatomic, strong) QNViewModel* viewModel;
 @property (weak, nonatomic) IBOutlet UITextView* textView;
 @property (strong, nonatomic) QNNote* note;
+@property (assign, nonatomic) Boolean isItNewNote;
 
 @end

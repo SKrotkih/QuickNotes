@@ -24,12 +24,12 @@ Start he app by pressing Command+R
 - remove note (swipe on table view)
 - edit note
 - localized
-- there is XCTest
+- XCTest presented
 
 07-25-2018
 Sergey Krotkih
 
 Note.
-There are my other source code examples in Swift, Objective-C, JavaScrip.
+Please feel free to learn my another source code examples in Swift and Objective-C:
 https://github.com/SKrotkih/eMia-iOS
 https://github.com/SKrotkih/YTLiveStreaming

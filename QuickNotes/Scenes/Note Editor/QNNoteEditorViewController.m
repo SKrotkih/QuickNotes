@@ -13,7 +13,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = NSLocalizedString(@"My notes", @"My notes");
+    self.title = self.isItNewNote ? NSLocalizedString(@"New Note", @"New Note") :  NSLocalizedString(@"Note", @"Note");
 }
 
 - (void) viewWillAppear:(BOOL)animated
