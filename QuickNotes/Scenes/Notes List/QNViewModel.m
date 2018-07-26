@@ -28,6 +28,7 @@
 CGFloat kEstimateRowHeight = 54.0;
 NSString* kCellIdentifier = @"QNNoteTableViewCell";
 
+// Bind the table view with view model.
 - (void) bindTo: (UITableView*) tableView router: (id) router
 {
     self.tableView = tableView;
@@ -48,7 +49,7 @@ NSString* kCellIdentifier = @"QNNoteTableViewCell";
     }];
 }
 
-- (void) selectNote: (QNNote*) note
+- (void) editNote: (QNNote*) note
 {
     [self.router editNote: note];
 }
@@ -78,13 +79,13 @@ NSString* kCellIdentifier = @"QNNoteTableViewCell";
         noteId = MAX(noteId, currId);
     }
     
-    // But we should use like this:
+    // It is not a good idea, because we should use like this:
     // NSString* noteId = [[NSUUID UUID] UUIDString];
     
     return [NSString stringWithFormat: @"%ld", noteId + 1];
 }
 
-#pragma mark- TableView Delegates
+#pragma mark- TableView Delegates protocol implementation
 
 - (NSInteger) tableView: (UITableView*) tableView numberOfRowsInSection: (NSInteger) section
 {
@@ -115,7 +116,7 @@ NSString* kCellIdentifier = @"QNNoteTableViewCell";
 {
     [self.tableView deselectRowAtIndexPath: indexPath animated: YES];
     QNNote* note = [self.notes objectAtIndex: indexPath.row];
-    [self selectNote: note];
+    [self editNote: note];
 }
 
 - (BOOL) tableView: (UITableView*) tableView canEditRowAtIndexPath: (NSIndexPath*) indexPath
