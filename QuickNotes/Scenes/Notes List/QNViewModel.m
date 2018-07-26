@@ -10,10 +10,13 @@
 #import "QNViewModel.h"
 #import "QNNote.h"
 #import "QNNoteTableViewCell.h"
+#import "QNNoteEditorViewController.h"
+#import "QNNotesRouter.h"
 
 @interface QNViewModel ()
 
 @property(weak, nonatomic) UITableView* tableView;
+@property(weak, nonatomic) QNNotesRouter* router;
 @property(strong, nonatomic) NSMutableArray* notes;
 
 @end
@@ -21,16 +24,17 @@
 @implementation QNViewModel
 
 @synthesize interactor;
+
 CGFloat kEstimateRowHeight = 54.0;
 NSString* kCellIdentifier = @"QNNoteTableViewCell";
 
-- (void) bindTo: (UITableView*) tableView
+- (void) bindTo: (UITableView*) tableView router: (id) router
 {
     self.tableView = tableView;
+    self.router = router;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.notes = [NSMutableArray array];
-    [self reloadData];
 }
 
 - (void) reloadData
@@ -41,7 +45,11 @@ NSString* kCellIdentifier = @"QNNoteTableViewCell";
             [self.tableView reloadData];
         });
     }];
-    
+}
+
+- (void) selectNote: (QNNote*) note
+{
+    [self.router launchNoteEditor: note];
 }
 
 #pragma mark- TableView Delegates
@@ -69,6 +77,14 @@ NSString* kCellIdentifier = @"QNNoteTableViewCell";
     {
         return cell.height;
     }
+}
+
+- (void) tableView: (nonnull UITableView*) tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+    [self.tableView deselectRowAtIndexPath: indexPath animated: YES];
+    QNNoteTableViewCell* cell = [tableView cellForRowAtIndexPath: indexPath];
+    QNNote* note = cell.note;
+    [self selectNote: note];
 }
 
 @end

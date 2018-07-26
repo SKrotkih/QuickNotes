@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "QNViewModel.h"
+#import "QNNotesRouter.h"
 
-@interface QNMainViewController : UIViewController
+@interface QNMainViewController : UIViewController <QNNotesRouter>
 
-@property(nonatomic, strong) QNViewModel* viewModel;
+@property (nonatomic, strong) QNViewModel* viewModel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end

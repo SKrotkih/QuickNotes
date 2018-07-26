@@ -11,8 +11,9 @@
 
 @interface QNViewModel: NSObject <UITableViewDataSource, UITableViewDelegate>
 
-@property(nonatomic, strong)  QNServiceInteractor* interactor;
+@property(nonatomic, strong) QNServiceInteractor* interactor;
 
-- (void) bindTo: (UITableView*) tableView;
+- (void) bindTo: (UITableView*) tableView router: (id) router;
+- (void) reloadData;
 
 @end

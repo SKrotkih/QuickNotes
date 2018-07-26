@@ -8,6 +8,7 @@
 
 #import "QNMainViewController.h"
 #import "QNDependencies.h"
+#import "QNNote.h"
 
 @interface QNMainViewController ()
 
@@ -19,6 +20,7 @@
 @synthesize tableView;
 
 QNDependencies* dependencies;
+NSString* kEditNoteSeque = @"editNote";
 
 - (void) viewDidLoad {
     [super viewDidLoad];
@@ -27,12 +29,26 @@ QNDependencies* dependencies;
     
     dependencies = [[QNDependencies alloc] init];
     [dependencies configure: self];
-    [viewModel bindTo: tableView];
+    [viewModel bindTo: tableView router: self];
+}
+
+- (void) viewWillAppear: (BOOL)animated
+{
+    [super viewWillAppear: animated];
+    
+    [viewModel reloadData];
 }
 
 - (void) didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - QNNotesRouter protocol implementation
+
+- (void) launchNoteEditor: (QNNote*) note
+{
+    [self performSegueWithIdentifier: kEditNoteSeque sender: self];
 }
 
 

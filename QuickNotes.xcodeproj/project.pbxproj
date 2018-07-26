@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7F40119521096FAA00735C13 /* QNNoteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F40119421096FAA00735C13 /* QNNoteTableViewCell.m */; };
+		7F40119921098B7800735C13 /* QNNoteEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F40119821098B7800735C13 /* QNNoteEditorViewController.m */; };
 		7F9BA12A2108A1AE0065A0EE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F9BA1292108A1AE0065A0EE /* AppDelegate.m */; };
 		7F9BA12D2108A1AE0065A0EE /* QNMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F9BA12C2108A1AE0065A0EE /* QNMainViewController.m */; };
 		7F9BA1302108A1AE0065A0EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F9BA12E2108A1AE0065A0EE /* Main.storyboard */; };
@@ -44,6 +45,9 @@
 /* Begin PBXFileReference section */
 		7F40119321096FAA00735C13 /* QNNoteTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QNNoteTableViewCell.h; sourceTree = "<group>"; };
 		7F40119421096FAA00735C13 /* QNNoteTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QNNoteTableViewCell.m; sourceTree = "<group>"; };
+		7F40119721098B7800735C13 /* QNNoteEditorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QNNoteEditorViewController.h; sourceTree = "<group>"; };
+		7F40119821098B7800735C13 /* QNNoteEditorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QNNoteEditorViewController.m; sourceTree = "<group>"; };
+		7F40119D21099B8B00735C13 /* QNNotesRouter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QNNotesRouter.h; sourceTree = "<group>"; };
 		7F9BA1252108A1AE0065A0EE /* QuickNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F9BA1282108A1AE0065A0EE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7F9BA1292108A1AE0065A0EE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -98,6 +102,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7F40119621098B3F00735C13 /* Note Editor */ = {
+			isa = PBXGroup;
+			children = (
+				7F40119721098B7800735C13 /* QNNoteEditorViewController.h */,
+				7F40119821098B7800735C13 /* QNNoteEditorViewController.m */,
+			);
+			path = "Note Editor";
+			sourceTree = "<group>";
+		};
 		7F9BA11C2108A1AE0065A0EE = {
 			isa = PBXGroup;
 			children = (
@@ -163,12 +176,13 @@
 			isa = PBXGroup;
 			children = (
 				7F9BA1672108AA320065A0EE /* Launch */,
-				7F9BA1642108A60E0065A0EE /* Main */,
+				7F9BA1642108A60E0065A0EE /* Notes List */,
+				7F40119621098B3F00735C13 /* Note Editor */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
 		};
-		7F9BA1642108A60E0065A0EE /* Main */ = {
+		7F9BA1642108A60E0065A0EE /* Notes List */ = {
 			isa = PBXGroup;
 			children = (
 				7F9BA12E2108A1AE0065A0EE /* Main.storyboard */,
@@ -178,10 +192,11 @@
 				7F40119421096FAA00735C13 /* QNNoteTableViewCell.m */,
 				7F9BA173210917C70065A0EE /* QNViewModel.h */,
 				7F9BA174210917C70065A0EE /* QNViewModel.m */,
+				7F40119D21099B8B00735C13 /* QNNotesRouter.h */,
 				7F9BA176210918DF0065A0EE /* QNDependencies.h */,
 				7F9BA177210918DF0065A0EE /* QNDependencies.m */,
 			);
-			path = Main;
+			path = "Notes List";
 			sourceTree = "<group>";
 		};
 		7F9BA1652108A63B0065A0EE /* Model */ = {
@@ -358,6 +373,7 @@
 				7F9BA12D2108A1AE0065A0EE /* QNMainViewController.m in Sources */,
 				7F9BA1382108A1AF0065A0EE /* main.m in Sources */,
 				7F9BA1722108CC330065A0EE /* QNServiceInteractor.m in Sources */,
+				7F40119921098B7800735C13 /* QNNoteEditorViewController.m in Sources */,
 				7F9BA12A2108A1AE0065A0EE /* AppDelegate.m in Sources */,
 				7F9BA175210917C70065A0EE /* QNViewModel.m in Sources */,
 				7F9BA178210918DF0065A0EE /* QNDependencies.m in Sources */,
