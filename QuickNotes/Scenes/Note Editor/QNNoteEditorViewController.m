@@ -8,10 +8,6 @@
 
 #import "QNNoteEditorViewController.h"
 
-@interface QNNoteEditorViewController ()
-
-@end
-
 @implementation QNNoteEditorViewController
 
 - (void)viewDidLoad {

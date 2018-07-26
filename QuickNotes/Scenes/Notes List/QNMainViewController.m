@@ -32,17 +32,11 @@ NSString* kEditNoteSeque = @"editNote";
     
     dependencies = [[QNDependencies alloc] init];
     [dependencies configure: self];
-    [self configureView];
+    [self configureAddNoteButton];
     [viewModel bindTo: tableView router: self];
 }
 
-- (void) viewWillAppear: (BOOL)animated
-{
-    [super viewWillAppear: animated];
-
-}
-
-- (void) configureView
+- (void) configureAddNoteButton
 {
     self.buttonBackgroundView.layer.cornerRadius = 30.0;
     UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget: self action: @selector(addNote)];
@@ -53,11 +47,6 @@ NSString* kEditNoteSeque = @"editNote";
 - (void) addNote
 {
     [self.viewModel addNote];
-}
-
-- (void) didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void) prepareForSegue: (UIStoryboardSegue*) segue sender: (id) sender

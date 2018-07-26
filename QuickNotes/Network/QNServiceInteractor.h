@@ -10,6 +10,10 @@
 
 @class QNNote;
 
+/*!
+ @brief REST API Implementation
+ 
+ */
 @interface QNServiceInteractor : NSObject
 
 /*!
@@ -27,8 +31,10 @@
  */
 - (void) getNotes: (void (^)(NSArray*)) dataCompletion;
 
+/*! @brief Async update note. */
 - (void) updateNote: (QNNote*) note completion: (void (^)(void)) completion;
 
+/*! @brief Delete note. */
 - (void) deleteNote: (QNNote*) note completion: (void (^)(void)) completion;
 
 @end

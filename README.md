@@ -23,6 +23,7 @@ Start he app by pressing Command+R
 - add new note
 - remove note (swipe on table view)
 - edit note
+- localized
 
 07-25-2018
 Sergey Krotkih

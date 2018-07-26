@@ -10,6 +10,7 @@
 #import "QNViewModel.h"
 #import "QNNotesRouter.h"
 
+/*! @brief List my notes */
 @interface QNMainViewController : UIViewController <QNNotesRouter>
 
 @property (nonatomic, strong) QNViewModel* viewModel;

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+/*! @brief Note Entity. */
 @interface QNNote: NSObject
 
 /*! @brief record id. */
