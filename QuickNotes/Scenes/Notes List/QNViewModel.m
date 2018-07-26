@@ -82,8 +82,7 @@ NSString* kCellIdentifier = @"QNNoteTableViewCell";
 - (void) tableView: (nonnull UITableView*) tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
     [self.tableView deselectRowAtIndexPath: indexPath animated: YES];
-    QNNoteTableViewCell* cell = [tableView cellForRowAtIndexPath: indexPath];
-    QNNote* note = cell.note;
+    QNNote* note = [self.notes objectAtIndex: indexPath.row];
     [self selectNote: note];
 }
 

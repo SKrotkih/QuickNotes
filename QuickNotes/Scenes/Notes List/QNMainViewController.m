@@ -9,8 +9,11 @@
 #import "QNMainViewController.h"
 #import "QNDependencies.h"
 #import "QNNote.h"
+#import "QNNoteEditorViewController.h"
 
 @interface QNMainViewController ()
+
+@property(nonatomic, weak) QNNote* note;
 
 @end
 
@@ -44,12 +47,20 @@ NSString* kEditNoteSeque = @"editNote";
     // Dispose of any resources that can be recreated.
 }
 
+- (void) prepareForSegue: (UIStoryboardSegue*) segue sender: (id) sender
+{
+    if ([segue.identifier isEqualToString: kEditNoteSeque]) {
+        QNNoteEditorViewController* viewController = (QNNoteEditorViewController*) segue.destinationViewController;
+        viewController.note = self.note;
+    }
+}
+
 #pragma mark - QNNotesRouter protocol implementation
 
 - (void) launchNoteEditor: (QNNote*) note
 {
+    self.note = note;
     [self performSegueWithIdentifier: kEditNoteSeque sender: self];
 }
-
 
 @end
