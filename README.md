@@ -30,12 +30,14 @@ Start he app by pressing Command+R
 Notes.
  
 There are some issues with API.
-Does not work some requests.
+Does not work some requests for me so does not work adding and editing notes functionality. 
 
+For example:
 PUT /notes/{id}
 I tried to send JSON (for example, i tried different):
 {"id":1,"title":"Jogging in park"}
 status code is 201 but nothing happened on the server (I expected to add a new record or update existed)
+(QNServiceInteraction.m)
 
 07-25-2018
 Sergey Krotkih
