@@ -11,8 +11,9 @@
 
 @implementation QNServiceInteractor
 
-NSString* baseURL = @"http://private-9aad-note10.apiary-mock.com";
+NSString* notesURL = @"http://private-9aad-note10.apiary-mock.com/notes";
 
+// API Request types
 typedef enum {
     getNotes,
     getNotesId,
@@ -21,10 +22,11 @@ typedef enum {
     deleteNotesId,
 } QNRequest;
 
+#pragma mark - Interface methods
 
 - (void) getNotes: (void (^)(NSArray*)) dataCompletion
 {
-    [self requestType: getNotes note: nil completion: ^(__nullable id json)
+    [self sendRequestType: getNotes note: nil completion: ^(__nullable id json)
     {
         if (json == nil)
         {
@@ -45,7 +47,7 @@ typedef enum {
 
 - (void) updateNote: (QNNote*) note completion: (void (^)(void)) completion
 {
-    [self requestType: putNotesId note: note completion: ^(__nullable id json)
+    [self sendRequestType: putNotesId note: note completion: ^(__nullable id json)
      {
          completion();
      }];
@@ -53,40 +55,35 @@ typedef enum {
 
 - (void) deleteNote: (QNNote*) note completion: (void (^)(void)) completion
 {
-    [self requestType: deleteNotesId note: note completion: ^(__nullable id json)
+    [self sendRequestType: deleteNotesId note: note completion: ^(__nullable id json)
      {
          completion();
      }];
 }
 
-#pragma mark Private methods
+#pragma mark - Private methods
 
 - (NSMutableURLRequest*) request: (QNRequest) type note: (nullable QNNote*) note
 {
-    NSMutableString* urlString = baseURL.mutableCopy;
+    NSMutableString* urlString = notesURL.mutableCopy;
     NSString* httpMethod;
     
     switch (type) {
         case getNotes:
-            [urlString appendString: @"/notes"];
             httpMethod = @"GET";
             break;
         case getNotesId:
-            [urlString appendString: @"/notes"];
             [urlString appendString: [NSString stringWithFormat: @"/%@", note.noteId]];
             httpMethod = @"GET";
             break;
         case postNotes:
-            [urlString appendString: @"/notes"];
             httpMethod = @"POST";
             break;
         case putNotesId:
-            [urlString appendString: @"/notes"];
             [urlString appendString: [NSString stringWithFormat: @"/%@", note.noteId]];
             httpMethod = @"PUT";
             break;
         case deleteNotesId:
-            [urlString appendString: @"/notes"];
             [urlString appendString: [NSString stringWithFormat: @"/%@", note.noteId]];
             httpMethod = @"DELETE";
             break;
@@ -108,60 +105,55 @@ typedef enum {
     NSURL* url = [NSURL URLWithString: urlString];
     NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL: url];
     request.HTTPMethod = httpMethod;
-    
+    [request setValue: @"application/json" forHTTPHeaderField: @"Content-Type"];
+
     if (type == putNotesId)
     {
-        [request setValue: @"application/json" forHTTPHeaderField: @"Accept"];
-        [request setValue: @"application/json" forHTTPHeaderField: @"Content-Type"];
-        NSString* jsonPostBody = [NSString stringWithFormat: @"{\"id\":%@,\"title\":\"%@\"}", note.noteId, note.title];
-        NSData* postData = [jsonPostBody dataUsingEncoding: NSUTF8StringEncoding allowLossyConversion: NO];
-        [request setHTTPBody: postData];
-    }
-    else
-    {
-        [request addValue: @"application/json" forHTTPHeaderField: @"Content-Type"];
+        // Set Up HTTP Body
+        NSString* jsonBody = [NSString stringWithFormat: @"{\"id\":%@,\"title\":\"%@\"}", note.noteId, note.title];
+        NSLog(@"%@", jsonBody);
+        NSData* bodyData = [jsonBody dataUsingEncoding: NSUTF8StringEncoding allowLossyConversion: NO];
+        [request setHTTPBody: bodyData];
     }
 
     return request;
 }
 
-- (void) requestType: (QNRequest) type note: (nullable QNNote*) note completion: (void (^)(__nullable id)) dataCompletion
+- (void) sendRequestType: (QNRequest) type note: (nullable QNNote*) note completion: (void (^)(__nullable id)) dataCompletion
 {
     NSMutableURLRequest* request = [self request: type note: note];
+    NSLog(@"%@", request);
     NSURLSessionConfiguration* config = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession* session = [NSURLSession sessionWithConfiguration: config];
     NSURLSessionDataTask* sessionTask = [session dataTaskWithRequest: request completionHandler: ^(NSData* data, NSURLResponse* response, NSError* error)
     {
         if (error) {
             NSLog(@"Error: %@", error.localizedDescription);
+            return;
         }
-        else
-        {
-            NSHTTPURLResponse* httpResp = (NSHTTPURLResponse*) response;
-            if (httpResp.statusCode == 200) {
-                id jsonObject = [NSJSONSerialization JSONObjectWithData: data
-                                                                options: kNilOptions
-                                                                  error: &error];
-                if (error) {
-                    NSLog(@"Error: %@", error.localizedDescription);
-                    dataCompletion(nil);
-                }
-                else
-                {
-                    dataCompletion(jsonObject);
-                }
-            }
-            else if (httpResp.statusCode == 201)
-            {
-                // But nothing happened!
-                NSLog(@"201 Created");
+        NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*) response;
+        NSInteger statusCode = httpResponse.statusCode;
+        if (statusCode >= 200 && statusCode <= 300) {
+            
+            NSLog(@"Satatus code: %ld", statusCode);
+            
+            id jsonObject = [NSJSONSerialization JSONObjectWithData: data
+                                                            options: kNilOptions
+                                                              error: &error];
+            if (error) {
+                NSLog(@"Error: %@", error.localizedDescription);
                 dataCompletion(nil);
             }
             else
             {
-                NSLog(@"Wrong satatus code: %ld", httpResp.statusCode);
-                dataCompletion(nil);
+                NSLog(@"%@", jsonObject);
+                dataCompletion(jsonObject);
             }
+        }
+        else
+        {
+            NSLog(@"Wrong satatus code: %ld", statusCode);
+            dataCompletion(nil);
         }
     }];
     [sessionTask resume];
