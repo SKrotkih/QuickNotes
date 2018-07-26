@@ -23,6 +23,9 @@ QNDependencies* dependencies;
 - (void) viewDidLoad {
     [super viewDidLoad];
 
+    self.title = NSLocalizedString(@"Quick Notes", "Quick Notes");
+    
+    dependencies = [[QNDependencies alloc] init];
     [dependencies configure: self];
     [viewModel bindTo: tableView];
 }

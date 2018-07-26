@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7F40119521096FAA00735C13 /* QNNoteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F40119421096FAA00735C13 /* QNNoteTableViewCell.m */; };
 		7F9BA12A2108A1AE0065A0EE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F9BA1292108A1AE0065A0EE /* AppDelegate.m */; };
 		7F9BA12D2108A1AE0065A0EE /* QNMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F9BA12C2108A1AE0065A0EE /* QNMainViewController.m */; };
 		7F9BA1302108A1AE0065A0EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F9BA12E2108A1AE0065A0EE /* Main.storyboard */; };
@@ -41,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7F40119321096FAA00735C13 /* QNNoteTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QNNoteTableViewCell.h; sourceTree = "<group>"; };
+		7F40119421096FAA00735C13 /* QNNoteTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QNNoteTableViewCell.m; sourceTree = "<group>"; };
 		7F9BA1252108A1AE0065A0EE /* QuickNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F9BA1282108A1AE0065A0EE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7F9BA1292108A1AE0065A0EE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -171,6 +174,8 @@
 				7F9BA12E2108A1AE0065A0EE /* Main.storyboard */,
 				7F9BA12B2108A1AE0065A0EE /* QNMainViewController.h */,
 				7F9BA12C2108A1AE0065A0EE /* QNMainViewController.m */,
+				7F40119321096FAA00735C13 /* QNNoteTableViewCell.h */,
+				7F40119421096FAA00735C13 /* QNNoteTableViewCell.m */,
 				7F9BA173210917C70065A0EE /* QNViewModel.h */,
 				7F9BA174210917C70065A0EE /* QNViewModel.m */,
 				7F9BA176210918DF0065A0EE /* QNDependencies.h */,
@@ -348,6 +353,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F40119521096FAA00735C13 /* QNNoteTableViewCell.m in Sources */,
 				7F9BA16B2108B6210065A0EE /* QNNote.m in Sources */,
 				7F9BA12D2108A1AE0065A0EE /* QNMainViewController.m in Sources */,
 				7F9BA1382108A1AF0065A0EE /* main.m in Sources */,

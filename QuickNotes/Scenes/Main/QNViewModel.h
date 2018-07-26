@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "QNServiceInteractor.h"
 
-@interface QNViewModel: NSObject
+@interface QNViewModel: NSObject <UITableViewDataSource, UITableViewDelegate>
 
 @property(nonatomic, strong)  QNServiceInteractor* interactor;
 
