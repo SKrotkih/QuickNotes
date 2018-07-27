@@ -7,15 +7,14 @@ Simple native iPhone application for management of personal notes.
 - Xcode 9.4.1
 - Objective-C
 
-## Install and Launch the App
+## How to install and launch the app
 
 - clone or unzip the repository. 
 - go to the root folder. 
-
-Open QuickNotes.xcworkspace
-Select QuickNotes scheme.
-Select iOS 11 iPhone simulator.
-Start he app by pressing Command+R
+- Open QuickNotes.xcworkspace
+- Select QuickNotes scheme.
+- Select iOS 11 iPhone simulator.
+- Start the app by pressing Command+R
 
 ## Features
 
@@ -25,8 +24,8 @@ Start he app by pressing Command+R
 - remove note (swipe on the TableView)
 - edit notes
 - RefreshControl on the TableView
-- localization - presented
-- XCTest - presented
+- localization - is present
+- XCTest - is present
 - some methods and properties are documented 
 - there is a possibility to add Swift modules. One module was added for testing 
 - MVVM
@@ -50,6 +49,6 @@ Sergey Krotkih
 Note.
 Right now I shared my old Objective-C project which I developed in 2014. There is source code here: https://github.com/SKrotkih/TheBestPlace . I had developed server side  as well (PHP code is presented).    
 
-Please feel free to learn my another source code examples in Swift and Objective-C:
+Please feel free to learn my other source code examples in Swift and Objective-C:
 https://github.com/SKrotkih/eMia-iOS
 https://github.com/SKrotkih/YTLiveStreaming
