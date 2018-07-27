@@ -11,15 +11,14 @@
 
 @implementation QNServiceInteractor
 
-NSString* notesURL = @"http://private-9aad-note10.apiary-mock.com/notes";
+NSString* notesURL0 = @"http://private-9aad-note10.apiary-mock.com/notes";
+NSString* notesURL = @"https://mishakrotkikh.000webhostapp.com/api";
 
 // API Request types
 typedef enum {
     getNotes,
-    getNotesId,
-    postNotes,
-    putNotesId,
-    deleteNotesId,
+    addNote,
+    deleteNote
 } QNRequest;
 
 #pragma mark - Interface methods
@@ -45,9 +44,17 @@ typedef enum {
     }];
 }
 
+- (void) addNote: (QNNote*) note completion: (void (^)(void)) completion
+{
+    [self sendRequestType: addNote note: note completion: ^(__nullable id json)
+     {
+         completion();
+     }];
+}
+
 - (void) updateNote: (QNNote*) note completion: (void (^)(void)) completion
 {
-    [self sendRequestType: putNotesId note: note completion: ^(__nullable id json)
+    [self sendRequestType: addNote note: note completion: ^(__nullable id json)
      {
          completion();
      }];
@@ -55,7 +62,7 @@ typedef enum {
 
 - (void) deleteNote: (QNNote*) note completion: (void (^)(void)) completion
 {
-    [self sendRequestType: deleteNotesId note: note completion: ^(__nullable id json)
+    [self sendRequestType: deleteNote note: note completion: ^(__nullable id json)
      {
          completion();
      }];
@@ -70,47 +77,34 @@ typedef enum {
     
     switch (type) {
         case getNotes:
+            [urlString appendString: @"/notes"];
             httpMethod = @"GET";
             break;
-        case getNotesId:
-            [urlString appendString: [NSString stringWithFormat: @"/%@", note.noteId]];
-            httpMethod = @"GET";
-            break;
-        case postNotes:
+        case addNote:
+            [urlString appendString: @"/note/create"];
             httpMethod = @"POST";
             break;
-        case putNotesId:
-            [urlString appendString: [NSString stringWithFormat: @"/%@", note.noteId]];
-            httpMethod = @"PUT";
-            break;
-        case deleteNotesId:
-            [urlString appendString: [NSString stringWithFormat: @"/%@", note.noteId]];
-            httpMethod = @"DELETE";
-            break;
+        case deleteNote:
+            [urlString appendString: @"/note/delete"];
+             httpMethod = @"POST";
+             break;
     }
-    
-    //Methods:
-    //GET /notes
-    //GET /notes/{id}
-    //POST /notes
-    //PUT /notes/{id}
-    //DELETE /notes/{id}
-
-//    [{
-//        "id": 1, "title": "Jogging in park"
-//    }, {
-//        "id": 2, "title": "Pick-up posters from post-office"
-//    }]
-    
     NSURL* url = [NSURL URLWithString: urlString];
     NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL: url];
     request.HTTPMethod = httpMethod;
     [request setValue: @"application/json" forHTTPHeaderField: @"Content-Type"];
 
-    if (type == putNotesId)
+    if (type == addNote)
     {
         // Set Up HTTP Body
         NSString* jsonBody = [NSString stringWithFormat: @"{\"id\":%@,\"title\":\"%@\"}", note.noteId, note.title];
+        NSLog(@"%@", jsonBody);
+        NSData* bodyData = [jsonBody dataUsingEncoding: NSUTF8StringEncoding allowLossyConversion: NO];
+        [request setHTTPBody: bodyData];
+    }
+    else if (type == deleteNote)
+    {
+        NSString* jsonBody = [NSString stringWithFormat: @"{\"id\":%@}", note.noteId];
         NSLog(@"%@", jsonBody);
         NSData* bodyData = [jsonBody dataUsingEncoding: NSUTF8StringEncoding allowLossyConversion: NO];
         [request setHTTPBody: bodyData];

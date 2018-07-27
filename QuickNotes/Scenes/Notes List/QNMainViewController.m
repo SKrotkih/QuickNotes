@@ -37,6 +37,7 @@ UIRefreshControl* refreshControl;
     [dependencies configure: self];
     [self configureAddNoteButton];
     [self configureRefreshControl];
+    [self configureActivityIndicator];
     [viewModel bindTo: tableView router: self];
 }
 
@@ -55,9 +56,15 @@ UIRefreshControl* refreshControl;
     [refreshControl addTarget: self action: @selector(refreshTable) forControlEvents:UIControlEventValueChanged];
 }
 
+- (void) configureActivityIndicator
+{
+    self.activityIndicatorView.layer.cornerRadius = 20.0;
+    self.viewModel.activityIndicatorView = self.activityIndicatorView;
+}
+
 - (void) addNote
 {
-    [self.viewModel addNote];
+    [self.viewModel showNoteEditorToAddNewNote];
 }
 
 - (void) prepareForSegue: (UIStoryboardSegue*) segue sender: (id) sender

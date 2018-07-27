@@ -16,6 +16,7 @@
 @property (nonatomic, strong) QNViewModel* viewModel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView* buttonBackgroundView;
+@property (weak, nonatomic) IBOutlet UIView* activityIndicatorView;
 
 @end
 

@@ -12,10 +12,19 @@
 @interface QNViewModel: NSObject <UITableViewDataSource, UITableViewDelegate>
 
 @property(nonatomic, strong) QNServiceInteractor* interactor;
+@property (weak, nonatomic) UIView* activityIndicatorView;
 
 - (void) bindTo: (UITableView*) tableView router: (id) router;
+
 - (void) reloadData;
+
+/*! @brief Send request to update note */
 - (void) updateNote: (QNNote*) note;
-- (void) addNote;
+
+/*! @brief Send request to add new note */
+- (void) addNote: (QNNote*) note;
+
+/*! @brief Show editor note for creating new note  */
+- (void) showNoteEditorToAddNewNote;
 
 @end

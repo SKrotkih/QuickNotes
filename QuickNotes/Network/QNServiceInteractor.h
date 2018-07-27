@@ -31,6 +31,9 @@
  */
 - (void) getNotes: (void (^)(NSArray*)) dataCompletion;
 
+/*! @brief Add note. */
+- (void) addNote: (QNNote*) note completion: (void (^)(void)) completion;
+
 /*! @brief Async update note. */
 - (void) updateNote: (QNNote*) note completion: (void (^)(void)) completion;
 

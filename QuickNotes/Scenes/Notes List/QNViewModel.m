@@ -41,18 +41,17 @@ NSString* kCellIdentifier = @"QNNoteTableViewCell";
 
 - (void) reloadData
 {
+    [self startActivity];
     [interactor getNotes: ^(NSArray* notes){
         [self.notes setArray: notes];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
+            [self stopActivity];
         });
     }];
 }
 
-- (void) editNote: (QNNote*) note
-{
-    [self.router editNote: note];
-}
+#pragma mark - Send request to server for updating and adding new note
 
 - (void) updateNote: (QNNote*) note
 {
@@ -61,7 +60,21 @@ NSString* kCellIdentifier = @"QNNoteTableViewCell";
     }];
 }
 
-- (void) addNote
+- (void) addNote: (QNNote*) note
+{
+    [self.interactor updateNote: note completion: ^{
+        [self reloadData];
+    }];
+}
+
+#pragma mark - Show Notes Editor
+
+- (void) showNoteEditorToEditNote: (QNNote*) note
+{
+    [self.router editNote: note];
+}
+
+- (void) showNoteEditorToAddNewNote
 {
     QNNote* note = [[QNNote alloc] init];
     note.noteId = [self uniqId];
@@ -69,7 +82,8 @@ NSString* kCellIdentifier = @"QNNoteTableViewCell";
     [self.router addNote: note];
 }
 
-// Generate uniq id
+#pragma mark - Generate uniq id
+
 - (NSString*) uniqId
 {
     NSInteger noteId = 0;
@@ -79,10 +93,26 @@ NSString* kCellIdentifier = @"QNNoteTableViewCell";
         noteId = MAX(noteId, currId);
     }
     
-    // It is not a good idea, because we should use like this:
+    // It is not a good idea, we should use like this:
     // NSString* noteId = [[NSUUID UUID] UUIDString];
     
     return [NSString stringWithFormat: @"%ld", noteId + 1];
+}
+
+#pragma mark - Activity Indicator
+
+- (void) startActivity
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.activityIndicatorView setHidden: NO];
+    });
+}
+
+- (void) stopActivity
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.activityIndicatorView setHidden: YES];
+    });
 }
 
 #pragma mark- TableView Delegates protocol implementation
@@ -116,7 +146,7 @@ NSString* kCellIdentifier = @"QNNoteTableViewCell";
 {
     [self.tableView deselectRowAtIndexPath: indexPath animated: YES];
     QNNote* note = [self.notes objectAtIndex: indexPath.row];
-    [self editNote: note];
+    [self showNoteEditorToEditNote: note];
 }
 
 - (BOOL) tableView: (UITableView*) tableView canEditRowAtIndexPath: (NSIndexPath*) indexPath
