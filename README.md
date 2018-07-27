@@ -27,6 +27,7 @@ Start he app by pressing Command+R
 - localization - presented
 - XCTest - presented
 - some methods and properties are documented 
+- there is a possibility to add Swift modules. One module was added for testing 
 - MVVM
 
 Notes.
