@@ -20,10 +20,11 @@ Start he app by pressing Command+R
 ## Features
 
 - browse all notes
-- auto resizing rows on the tableview
+- auto resizing rows on the TableView
 - add new note
-- remove note (swipe on tableview)
+- remove note (swipe on the TableView)
 - edit notes
+- RefreshControl on the TableView
 - localization - presented
 - XCTest - presented
 - some methods and properties are documented 
