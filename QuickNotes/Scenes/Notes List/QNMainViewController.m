@@ -7,6 +7,7 @@
 //
 
 #import "QNMainViewController.h"
+#import "QuickNotes-Swift.h"
 #import "QNDependencies.h"
 #import "QNNote.h"
 #import "QNNoteEditorViewController.h"
@@ -25,6 +26,7 @@
 
 QNDependencies* dependencies;
 NSString* kEditNoteSeque = @"editNote";
+UIRefreshControl* refreshControl;
 
 - (void) viewDidLoad {
     [super viewDidLoad];
@@ -34,6 +36,7 @@ NSString* kEditNoteSeque = @"editNote";
     dependencies = [[QNDependencies alloc] init];
     [dependencies configure: self];
     [self configureAddNoteButton];
+    [self configureRefreshControl];
     [viewModel bindTo: tableView router: self];
 }
 
@@ -43,6 +46,13 @@ NSString* kEditNoteSeque = @"editNote";
     UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget: self action: @selector(addNote)];
     tapRecognizer.numberOfTapsRequired = 1;
     [self.buttonBackgroundView addGestureRecognizer: tapRecognizer];
+}
+
+- (void) configureRefreshControl
+{
+    refreshControl = [[UIRefreshControl alloc]init];
+    [self.tableView addSubview:refreshControl];
+    [refreshControl addTarget: self action: @selector(refreshTable) forControlEvents:UIControlEventValueChanged];
 }
 
 - (void) addNote
@@ -58,6 +68,12 @@ NSString* kEditNoteSeque = @"editNote";
         viewController.isItNewNote = self.isItNewNote;
         viewController.viewModel = self.viewModel;
     }
+}
+
+- (void) refreshTable
+{
+    [refreshControl endRefreshing];
+    [viewModel reloadData];
 }
 
 #pragma mark - QNNotesRouter protocol implementation

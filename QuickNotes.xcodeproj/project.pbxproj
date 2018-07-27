@@ -23,6 +23,7 @@
 		7F9BA1722108CC330065A0EE /* QNServiceInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F9BA1712108CC330065A0EE /* QNServiceInteractor.m */; };
 		7F9BA175210917C70065A0EE /* QNViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F9BA174210917C70065A0EE /* QNViewModel.m */; };
 		7F9BA178210918DF0065A0EE /* QNDependencies.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F9BA177210918DF0065A0EE /* QNDependencies.m */; };
+		7FFEAED6210B549300CA85BA /* RefreshController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FFEAED5210B549300CA85BA /* RefreshController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7F3D96DF210B4D33005D2DFD /* QuickNotes-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QuickNotes-Bridging-Header.h"; sourceTree = "<group>"; };
 		7F40119321096FAA00735C13 /* QNNoteTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QNNoteTableViewCell.h; sourceTree = "<group>"; };
 		7F40119421096FAA00735C13 /* QNNoteTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QNNoteTableViewCell.m; sourceTree = "<group>"; };
 		7F40119721098B7800735C13 /* QNNoteEditorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QNNoteEditorViewController.h; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 		7F9BA174210917C70065A0EE /* QNViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QNViewModel.m; sourceTree = "<group>"; };
 		7F9BA176210918DF0065A0EE /* QNDependencies.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QNDependencies.h; sourceTree = "<group>"; };
 		7F9BA177210918DF0065A0EE /* QNDependencies.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QNDependencies.m; sourceTree = "<group>"; };
+		7FFEAED5210B549300CA85BA /* RefreshController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +105,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7F3D96DE210B4D06005D2DFD /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				7FFEAED5210B549300CA85BA /* RefreshController.swift */,
+				7F3D96DF210B4D33005D2DFD /* QuickNotes-Bridging-Header.h */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		7F40119621098B3F00735C13 /* Note Editor */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,6 +149,7 @@
 				7F9BA16F2108CC010065A0EE /* Network */,
 				7F9BA1652108A63B0065A0EE /* Model */,
 				7F9BA1632108A6040065A0EE /* Scenes */,
+				7F3D96DE210B4D06005D2DFD /* Helpers */,
 				7F9BA1662108AA0A0065A0EE /* Supporting files */,
 				7F9BA1622108A5E10065A0EE /* Resources */,
 				7F9BA1372108A1AF0065A0EE /* main.m */,
@@ -302,6 +315,7 @@
 				TargetAttributes = {
 					7F9BA1242108A1AE0065A0EE = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 0940;
 					};
 					7F9BA13C2108A1B00065A0EE = {
 						CreatedOnToolsVersion = 9.4.1;
@@ -376,6 +390,7 @@
 				7F40119921098B7800735C13 /* QNNoteEditorViewController.m in Sources */,
 				7F9BA12A2108A1AE0065A0EE /* AppDelegate.m in Sources */,
 				7F9BA175210917C70065A0EE /* QNViewModel.m in Sources */,
+				7FFEAED6210B549300CA85BA /* RefreshController.swift in Sources */,
 				7F9BA178210918DF0065A0EE /* QNDependencies.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -556,7 +571,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = N5B5T39W8Y;
 				INFOPLIST_FILE = QuickNotes/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -565,6 +582,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.homework.QuickNotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "QuickNotes/Helpers/QuickNotes-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -573,7 +593,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = N5B5T39W8Y;
 				INFOPLIST_FILE = QuickNotes/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -582,6 +604,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.homework.QuickNotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "QuickNotes/Helpers/QuickNotes-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -589,6 +613,7 @@
 		7F9BA1552108A1B00065A0EE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N5B5T39W8Y;
@@ -608,6 +633,7 @@
 		7F9BA1562108A1B00065A0EE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N5B5T39W8Y;
@@ -627,6 +653,7 @@
 		7F9BA1582108A1B00065A0EE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N5B5T39W8Y;
 				INFOPLIST_FILE = QuickNotesUITests/Info.plist;
@@ -645,6 +672,7 @@
 		7F9BA1592108A1B00065A0EE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N5B5T39W8Y;
 				INFOPLIST_FILE = QuickNotesUITests/Info.plist;
