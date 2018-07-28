@@ -33,6 +33,10 @@ Simple native iPhone application for management of personal notes.
 07-25-2018
 Sergey Krotkih
 
+## Updates
+
+07-28-2018 New API implemented. Bug fixes. Refactoring.
+
 Note.
 I shared my old Objective-C project which I developed in 2014 right now. There is source code here: https://github.com/SKrotkih/TheBestPlace . I had developed server side  as well (PHP code is presented).    
 
