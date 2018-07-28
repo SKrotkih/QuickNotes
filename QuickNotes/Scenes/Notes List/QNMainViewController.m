@@ -85,17 +85,10 @@ UIRefreshControl* refreshControl;
 
 #pragma mark - QNNotesRouter protocol implementation
 
-- (void) editNote: (QNNote*) note
+- (void) showNoteEditor: (QNNote*) note newNote: (BOOL) newNote
 {
+    self.isItNewNote = newNote;
     self.note = note;
-    self.isItNewNote = NO;
-    [self performSegueWithIdentifier: kEditNoteSeque sender: self];
-}
-
-- (void) addNote: (QNNote*) note
-{
-    self.note = note;
-    self.isItNewNote = YES;
     [self performSegueWithIdentifier: kEditNoteSeque sender: self];
 }
 

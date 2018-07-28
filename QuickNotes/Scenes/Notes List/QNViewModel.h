@@ -19,10 +19,10 @@
 - (void) reloadData;
 
 /*! @brief Send request to update note */
-- (void) updateNote: (QNNote*) note;
+- (void) updateNoteRequest: (QNNote*) note;
 
 /*! @brief Send request to add new note */
-- (void) addNote: (QNNote*) note;
+- (void) addNoteRequest: (QNNote*) note;
 
 /*! @brief Show editor note for creating new note  */
 - (void) showNoteEditorToAddNewNote;

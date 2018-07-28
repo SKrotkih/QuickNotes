@@ -26,7 +26,6 @@
 
 @synthesize interactor;
 
-CGFloat kEstimateRowHeight = 54.0;
 NSString* kCellIdentifier = @"QNNoteTableViewCell";
 
 // Bind the table view with view model.
@@ -54,14 +53,14 @@ NSString* kCellIdentifier = @"QNNoteTableViewCell";
 
 #pragma mark - Send request to server for updating and adding new note
 
-- (void) updateNote: (QNNote*) note
+- (void) updateNoteRequest: (QNNote*) note
 {
     [self.interactor updateNote: note completion: ^{
         [self reloadData];
     }];
 }
 
-- (void) addNote: (QNNote*) note
+- (void) addNoteRequest: (QNNote*) note
 {
     [self.interactor addNote: note completion: ^{
         [self reloadData];
@@ -72,7 +71,7 @@ NSString* kCellIdentifier = @"QNNoteTableViewCell";
 
 - (void) showNoteEditorToEditNote: (QNNote*) note
 {
-    [self.router editNote: note];
+    [self.router showNoteEditor: note newNote: NO];
 }
 
 - (void) showNoteEditorToAddNewNote
@@ -80,7 +79,7 @@ NSString* kCellIdentifier = @"QNNoteTableViewCell";
     QNNote* note = [[QNNote alloc] init];
     note.noteId = [self uniqId];
     note.title = @"";
-    [self.router addNote: note];
+    [self.router showNoteEditor: note newNote: YES];
 }
 
 #pragma mark - Generate uniq id

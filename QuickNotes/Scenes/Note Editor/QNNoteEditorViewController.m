@@ -28,7 +28,7 @@
 }
 
 - (IBAction) backButtonPressed: (id) sender {
-    [self.navigationController popViewControllerAnimated: YES];
+    [self close];
 }
 
 - (IBAction) doneButtonPressed: (id) sender {
@@ -47,12 +47,17 @@
     self.note.title = text;
     if (self.isItNewNote)
     {
-        [self.viewModel addNote: self.note];
+        [self.viewModel addNoteRequest: self.note];
     }
     else
     {
-        [self.viewModel updateNote: self.note];
+        [self.viewModel updateNoteRequest: self.note];
     }
+    [self close];
+}
+
+- (void) close
+{
     [self.navigationController popViewControllerAnimated: YES];
 }
 
