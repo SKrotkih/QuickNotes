@@ -7,6 +7,7 @@
 //
 
 #import "QNNoteEditorViewController.h"
+#import "QNHelpers.h"
 
 @implementation QNNoteEditorViewController
 
@@ -19,6 +20,8 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear: animated];
+
+//    NSString* str = @"Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris, quis nostrud exercitation ullamco laboris exercitation ullamco laboris";
     
     [self.textView setText: self.note.title];
     [self.textView becomeFirstResponder];
@@ -29,7 +32,19 @@
 }
 
 - (IBAction) doneButtonPressed: (id) sender {
-    self.note.title = self.textView.text;
+    NSString* text = self.textView.text;
+    NSInteger length = text.length;
+    if (length == 0)
+    {
+        [QNHelpers alert: NSLocalizedString(@"You should enter at least one symbol", @"You should enter at least one symbol") sender: self];
+        return;
+    }
+    else if (length >= 256) {
+        [QNHelpers alert: NSLocalizedString(@"The text is too long. Please enter less than 256 symbols", @"The text is too long. Please enter less than 256 symbols") sender: self];
+        return;
+    }
+    
+    self.note.title = text;
     if (self.isItNewNote)
     {
         [self.viewModel addNote: self.note];

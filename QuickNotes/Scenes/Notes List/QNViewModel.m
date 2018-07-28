@@ -18,6 +18,7 @@
 @property(weak, nonatomic) UITableView* tableView;
 @property(weak, nonatomic) QNNotesRouter* router;
 @property(strong, nonatomic) NSMutableArray* notes;
+@property (nonatomic, strong) QNNoteTableViewCell* prototypeCell;
 
 @end
 
@@ -62,7 +63,7 @@ NSString* kCellIdentifier = @"QNNoteTableViewCell";
 
 - (void) addNote: (QNNote*) note
 {
-    [self.interactor updateNote: note completion: ^{
+    [self.interactor addNote: note completion: ^{
         [self reloadData];
     }];
 }
@@ -93,7 +94,7 @@ NSString* kCellIdentifier = @"QNNoteTableViewCell";
         noteId = MAX(noteId, currId);
     }
     
-    // It is not a good idea, we should use like this:
+    // TOIDO: we should use like this:
     // NSString* noteId = [[NSUUID UUID] UUIDString];
     
     return [NSString stringWithFormat: @"%ld", noteId + 1];
@@ -115,7 +116,7 @@ NSString* kCellIdentifier = @"QNNoteTableViewCell";
     });
 }
 
-#pragma mark- TableView Delegates protocol implementation
+#pragma mark - TableView Delegates protocol implementation
 
 - (NSInteger) tableView: (UITableView*) tableView numberOfRowsInSection: (NSInteger) section
 {
@@ -132,14 +133,11 @@ NSString* kCellIdentifier = @"QNNoteTableViewCell";
 }
 
 - (CGFloat) tableView: (UITableView*) tableView heightForRowAtIndexPath: (NSIndexPath*) indexPath {
-    QNNoteTableViewCell* cell = [tableView cellForRowAtIndexPath: indexPath];
-    if (cell == nil) {
-        return kEstimateRowHeight;
-    }
-    else
-    {
-        return cell.height;
-    }
+    QNNoteTableViewCell* cell = [self prototypeCell];
+    QNNote* note = [self.notes objectAtIndex: indexPath.row];
+    cell.note = note;
+    [cell layoutIfNeeded];
+    return cell.height;
 }
 
 - (void) tableView: (nonnull UITableView*) tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
@@ -148,6 +146,8 @@ NSString* kCellIdentifier = @"QNNoteTableViewCell";
     QNNote* note = [self.notes objectAtIndex: indexPath.row];
     [self showNoteEditorToEditNote: note];
 }
+
+#pragma mark - Enable editing
 
 - (BOOL) tableView: (UITableView*) tableView canEditRowAtIndexPath: (NSIndexPath*) indexPath
 {
@@ -163,6 +163,17 @@ NSString* kCellIdentifier = @"QNNoteTableViewCell";
             [self reloadData];
         }];
     }
+}
+
+#pragma mark -
+
+- (QNNoteTableViewCell*) prototypeCell
+{
+    if (!_prototypeCell)
+    {
+        _prototypeCell = [self.tableView dequeueReusableCellWithIdentifier: kCellIdentifier];
+    }
+    return _prototypeCell;
 }
 
 @end

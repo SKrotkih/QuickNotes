@@ -9,3 +9,5 @@
 "Quick Notes" = "Quick Notes";
 "Note" = "Note";
 "New Note" = "New Note";
+"You should enter at least one symbol" = "You should enter at least one symbol";
+"The text is too long. Please enter less than 256 symbols" = "The text is too long. Please enter less than 256 symbols";

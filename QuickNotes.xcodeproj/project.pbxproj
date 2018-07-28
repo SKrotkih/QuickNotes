@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7F40119521096FAA00735C13 /* QNNoteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F40119421096FAA00735C13 /* QNNoteTableViewCell.m */; };
 		7F40119921098B7800735C13 /* QNNoteEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F40119821098B7800735C13 /* QNNoteEditorViewController.m */; };
+		7F409B6D210C25BC0017612D /* QNHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F409B6C210C25BC0017612D /* QNHelpers.m */; };
 		7F9BA12A2108A1AE0065A0EE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F9BA1292108A1AE0065A0EE /* AppDelegate.m */; };
 		7F9BA12D2108A1AE0065A0EE /* QNMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F9BA12C2108A1AE0065A0EE /* QNMainViewController.m */; };
 		7F9BA1302108A1AE0065A0EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F9BA12E2108A1AE0065A0EE /* Main.storyboard */; };
@@ -50,6 +51,8 @@
 		7F40119721098B7800735C13 /* QNNoteEditorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QNNoteEditorViewController.h; sourceTree = "<group>"; };
 		7F40119821098B7800735C13 /* QNNoteEditorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QNNoteEditorViewController.m; sourceTree = "<group>"; };
 		7F40119D21099B8B00735C13 /* QNNotesRouter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QNNotesRouter.h; sourceTree = "<group>"; };
+		7F409B6B210C25BC0017612D /* QNHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QNHelpers.h; sourceTree = "<group>"; };
+		7F409B6C210C25BC0017612D /* QNHelpers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QNHelpers.m; sourceTree = "<group>"; };
 		7F9BA1252108A1AE0065A0EE /* QuickNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F9BA1282108A1AE0065A0EE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7F9BA1292108A1AE0065A0EE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -109,6 +112,8 @@
 			isa = PBXGroup;
 			children = (
 				7FFEAED5210B549300CA85BA /* RefreshController.swift */,
+				7F409B6B210C25BC0017612D /* QNHelpers.h */,
+				7F409B6C210C25BC0017612D /* QNHelpers.m */,
 				7F3D96DF210B4D33005D2DFD /* QuickNotes-Bridging-Header.h */,
 			);
 			path = Helpers;
@@ -387,6 +392,7 @@
 				7F9BA12D2108A1AE0065A0EE /* QNMainViewController.m in Sources */,
 				7F9BA1382108A1AF0065A0EE /* main.m in Sources */,
 				7F9BA1722108CC330065A0EE /* QNServiceInteractor.m in Sources */,
+				7F409B6D210C25BC0017612D /* QNHelpers.m in Sources */,
 				7F40119921098B7800735C13 /* QNNoteEditorViewController.m in Sources */,
 				7F9BA12A2108A1AE0065A0EE /* AppDelegate.m in Sources */,
 				7F9BA175210917C70065A0EE /* QNViewModel.m in Sources */,

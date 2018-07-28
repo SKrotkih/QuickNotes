@@ -15,7 +15,7 @@
 @interface QNMainViewController ()
 
 @property(nonatomic, weak) QNNote* note;
-@property(nonatomic, assign) Boolean isItNewNote;
+@property(nonatomic, assign) BOOL isItNewNote;
 
 @end
 

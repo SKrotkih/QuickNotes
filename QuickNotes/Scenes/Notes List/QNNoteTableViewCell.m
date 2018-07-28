@@ -15,9 +15,6 @@ CGFloat kMarginSpace = 15.0;
 - (void) setNote: (QNNote*) note
 {
     self.titleLabel.text = note.title;
-    
-//    self.titleLabel.text = @"- clone or unzip the repository. - go to the root folder. Open QuickNotes.xcworkspace Select QuickNotes scheme. Select iOS iPhone simulator. Start app by pressing Command+R";
-
     [self.titleLabel sizeToFit];
 }
 

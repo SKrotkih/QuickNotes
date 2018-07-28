@@ -25,22 +25,22 @@ typedef enum {
 - (void) getNotes: (void (^)(NSArray*)) dataCompletion
 {
     [self sendRequestType: getNotes note: nil completion: ^(__nullable id json)
-    {
-        if (json == nil)
-        {
-            dataCompletion([NSArray array]);
-        }
-        else
-        {
-            NSMutableArray* notes = [NSMutableArray array];
-            for (NSDictionary* dict in (NSArray*) json)
-            {
-                QNNote* note = [QNNote parse: dict];
-                [notes addObject: note];
-            }
-            dataCompletion(notes);
-        }
-    }];
+     {
+         if (json == nil)
+         {
+             dataCompletion([NSArray array]);
+         }
+         else
+         {
+             NSMutableArray* notes = [NSMutableArray array];
+             for (NSDictionary* dict in (NSArray*) json)
+             {
+                 QNNote* note = [QNNote parse: dict];
+                 [notes addObject: note];
+             }
+             dataCompletion(notes);
+         }
+     }];
 }
 
 - (void) addNote: (QNNote*) note completion: (void (^)(void)) completion
@@ -53,9 +53,12 @@ typedef enum {
 
 - (void) updateNote: (QNNote*) note completion: (void (^)(void)) completion
 {
-    [self sendRequestType: addNote note: note completion: ^(__nullable id json)
+    [self sendRequestType: deleteNote note: note completion: ^(__nullable id json)
      {
-         completion();
+         [self sendRequestType: addNote note: note completion: ^(__nullable id json)
+          {
+              completion();
+          }];
      }];
 }
 
@@ -75,37 +78,37 @@ typedef enum {
     NSLog(@"%@", request);
     NSURLSessionConfiguration* config = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession* session = [NSURLSession sessionWithConfiguration: config];
-    NSURLSessionDataTask* sessionTask = [session dataTaskWithRequest: request completionHandler: ^(NSData* data, NSURLResponse* response, NSError* error)
-                                         {
-                                             if (error) {
-                                                 NSLog(@"Error: %@", error.localizedDescription);
-                                                 return;
-                                             }
-                                             NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*) response;
-                                             NSInteger statusCode = httpResponse.statusCode;
-                                             if (statusCode >= 200 && statusCode <= 300) {
-                                                 
-                                                 NSLog(@"Satatus code: %ld", statusCode);
-                                                 
-                                                 id jsonObject = [NSJSONSerialization JSONObjectWithData: data
-                                                                                                 options: kNilOptions
-                                                                                                   error: &error];
-                                                 if (error) {
-                                                     NSLog(@"Error: %@", error.localizedDescription);
-                                                     dataCompletion(nil);
-                                                 }
-                                                 else
-                                                 {
-                                                     NSLog(@"%@", jsonObject);
-                                                     dataCompletion(jsonObject);
-                                                 }
-                                             }
-                                             else
-                                             {
-                                                 NSLog(@"Wrong satatus code: %ld", statusCode);
-                                                 dataCompletion(nil);
-                                             }
-                                         }];
+    NSURLSessionDataTask* sessionTask = [session dataTaskWithRequest: request
+                                                   completionHandler: ^(NSData* data, NSURLResponse* response, NSError* error) {
+                                                       if (error) {
+                                                           NSLog(@"Error: %@", error.localizedDescription);
+                                                           return;
+                                                       }
+                                                       NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*) response;
+                                                       NSInteger statusCode = httpResponse.statusCode;
+                                                       if (statusCode >= 200 && statusCode <= 300) {
+                                                           
+                                                           NSLog(@"Satatus code: %ld", statusCode);
+                                                           
+                                                           id jsonObject = [NSJSONSerialization JSONObjectWithData: data
+                                                                                                           options: kNilOptions
+                                                                                                             error: &error];
+                                                           if (error) {
+                                                               NSLog(@"Error: %@", error.localizedDescription);
+                                                               dataCompletion(nil);
+                                                           }
+                                                           else
+                                                           {
+                                                               NSLog(@"%@", jsonObject);
+                                                               dataCompletion(jsonObject);
+                                                           }
+                                                       }
+                                                       else
+                                                       {
+                                                           NSLog(@"Wrong satatus code: %ld", statusCode);
+                                                           dataCompletion(nil);
+                                                       }
+                                                   }];
     [sessionTask resume];
 }
 
@@ -123,7 +126,7 @@ typedef enum {
         NSData* bodyData = [body dataUsingEncoding: NSUTF8StringEncoding allowLossyConversion: NO];
         [request setHTTPBody: bodyData];
     }
-
+    
     return request;
 }
 
@@ -142,7 +145,7 @@ typedef enum {
             [urlString appendString: @"/note/delete"];
             break;
     }
-
+    
     return urlString;
 }
 
@@ -186,3 +189,4 @@ typedef enum {
 }
 
 @end
+
